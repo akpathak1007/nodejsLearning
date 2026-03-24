@@ -1,0 +1,20 @@
+{
+  "name": "nodejslearning",
+  "version": "1.0.0",
+  "description": "learning core javascript, nodejs, express, mongodb, next.js, sql, oops concept, design pattern",
+  "homepage": "https://github.com/akpathak1007/nodejsLearning#readme",
+  "bugs": {
+    "url": "https://github.com/akpathak1007/nodejsLearning/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/akpathak1007/nodejsLearning.git"
+  },
+  "license": "ISC",
+  "author": "Anuj Pathak",
+  "type": "modules",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
