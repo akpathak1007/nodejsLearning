@@ -1,3 +1,5 @@
 *.js~
 *.cjs~
 *.js#
+.aider*
+node_modules

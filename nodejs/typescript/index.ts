@@ -8,9 +8,12 @@ function isAdult(user: User): boolean {
 }
 
 const justine = {
-  name: "Justine",
+  //  name: "Justine",
   age: 23,
-} satisfies User;
-
-isJustineAnAdult = isAdult({ age: 12 });
+};
+enum subject {
+  English = 2,
+  Hindi = 1,
+}
+const isJustineAnAdult = isAdult(justine);
 console.log(isJustineAnAdult);
