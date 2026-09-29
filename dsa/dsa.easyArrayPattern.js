@@ -24,6 +24,7 @@ practice(visibility.consecutiveOnes, () => {
       consecutive > consecutiveSecond ? consecutive : consecutiveSecond;
     console.log(temp);
   };
+  handler([1, 1, 0, 1, 1, 1]);
   handler([0, 1, 0, 0, 1, 1, 0, 1]);
   handler([]);
   handler([1, 1, 0, 1, 1, 1]);
