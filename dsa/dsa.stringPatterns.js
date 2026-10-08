@@ -1,5 +1,304 @@
 const visibility = isVisible();
 
+practice(visibility.integerToRomanGreedy, () => {
+  const handler = (num) => {
+    const mapper = [
+      [1000, "M"],
+      [900, "CM"],
+      [500, "D"],
+      [400, "CD"],
+      [100, "C"],
+      [90, "XC"],
+      [50, "L"],
+      [40, "XL"],
+      [10, "X"],
+      [9, "IX"],
+      [5, "V"],
+      [4, "IV"],
+      [1, "I"],
+    ];
+
+    let result = "";
+    for (let [key, value] of mapper) {
+      debugger;
+      while (num >= key) {
+        result += value;
+        num -= key;
+        debugger;
+      }
+      debugger;
+    }
+    return result;
+  };
+  log(58); // "LVIII"
+  log(8);
+  log(17);
+  log(16);
+  log(68);
+  log(1994); // "MCMXCIV"
+  log(2999);
+  log(3999);
+  log(1); // "I"
+  log(3); // "III"
+  log(4); // "IV"
+  log(9); // "IX"
+  log(40); // "XL"
+  log(90); // "XC"
+  log(2024); // "MMXXIV"
+  log(3999); // "MMMCMXCIX"
+
+  function log(str1) {
+    console.log("#### INPUT", str1, "####");
+    const result = handler(str1);
+    console.log(result);
+  }
+});
+
+practice(visibility.integerToRoman, () => {
+  const maper = {
+    1: "I",
+    5: "V",
+    10: "X",
+    50: "L",
+    100: "C",
+    500: "D",
+    1000: "M",
+  };
+  const mapper2 = {
+    4: "IV",
+    9: "IX",
+    40: "XL",
+    90: "XC",
+    400: "CD",
+    900: "CM",
+  };
+  const handler = (num) => {
+    let position = 1;
+    let response = "";
+    debugger;
+    while (num > 0) {
+      let result = "";
+      let lastDigit = num % 10;
+      debugger;
+      if (lastDigit === 1 || lastDigit === 5) {
+        result = maper[lastDigit * position];
+        debugger;
+      } else if (lastDigit * position in mapper2) {
+        result = mapper2[lastDigit * position] + result;
+        debugger;
+      } else if (lastDigit > 1 && lastDigit < 5) {
+        let base = maper[position];
+        for (let i = 0; i < lastDigit; i++) {
+          result += base;
+        }
+        debugger;
+      } else if (lastDigit > 5) {
+        let char = maper[5 * position];
+        let base = maper[position];
+        for (let i = 5; i < lastDigit; i++) {
+          char += base;
+        }
+        result = char;
+        debugger;
+      }
+      position *= 10;
+      num = Math.floor(num / 10);
+      debugger;
+      response = result + response;
+    }
+    return response;
+  };
+  log(58); // "LVIII"
+  log(8);
+  log(17);
+  log(16);
+  log(68);
+  log(1994); // "MCMXCIV"
+  log(2999);
+  log(3999);
+  log(1); // "I"
+  log(3); // "III"
+  log(4); // "IV"
+  log(9); // "IX"
+  log(40); // "XL"
+
+  log(90); // "XC"
+
+  log(2024); // "MMXXIV"
+  log(3999); // "MMMCMXCIX"
+  function log(str1) {
+    console.log("#### INPUT", str1, "####");
+    const result = handler(str1);
+    console.log(result);
+  }
+});
+
+practice(visibility.romanInteger, () => {
+  const handler = (s) => {
+    const maper = {
+      I: 1,
+      V: 5,
+      X: 10,
+      L: 50,
+      C: 100,
+      D: 500,
+      M: 1000,
+    };
+    const mapper2 = {
+      IV: 4,
+      IX: 9,
+      XL: 40,
+      XC: 90,
+      CD: 400,
+      CM: 900,
+    };
+    const mapper3 = new Set(["I", "X", "C"]);
+    let result = 0;
+    let len = s.length - 1;
+    for (let i = 0; i <= len; i++) {
+      let value;
+      let ie = s[i];
+      debugger;
+      if (mapper3.has(ie) && i < len) {
+        let nextValue = s[i + 1];
+        let temp = ie + nextValue;
+        debugger;
+        if (temp in mapper2) {
+          i++;
+          value = mapper2[temp];
+          debugger;
+        } else {
+          value = maper[ie];
+        }
+      } else {
+        value = maper[ie];
+        debugger;
+      }
+      result += value;
+      debugger;
+    }
+    debugger;
+    return result;
+  };
+  log("MCMXCIV");
+  log("III");
+  log("LVIII");
+  log("III"); // 3
+  log("IV"); // 4
+  log("IX"); // 9
+  log("LVIII"); // 58
+  log("MCMXCIV"); // 1994
+  log("I"); // 1
+  log("V"); // 5
+  log("X"); // 10
+  log("XL"); // 40
+  log("XC"); // 90
+  log("CD"); // 400
+  log("CM"); // 900
+  log("XIII"); // 13
+  log("XXVII"); // 27
+  log("MMXXIV"); // 2024
+  log("MMMCMXCIX"); // 3999
+
+  function log(str1) {
+    console.log("#### INPUT", str1, "####");
+    const result = handler(str1);
+    console.log(result);
+  }
+});
+
+practice(visibility.depthOfParentheses, () => {
+  const handler = (s) => {
+    let maxCount = 0;
+    let count = 0;
+    debugger;
+    for (let i of s) {
+      if (i === "(") {
+        count++;
+        maxCount = Math.max(maxCount, count);
+        debugger;
+      } else if (i === ")") {
+        count--;
+        debugger;
+      }
+      debugger;
+    }
+    debugger;
+    return maxCount;
+  };
+
+  log("(1)+((2))+(((3)))");
+  log("()(())((()()))");
+  log("(1+(2*3)+((8)/4))+1");
+  log("(1+(2*3)+((8)/4))+1");
+  log("(1)+((2))+(((3)))");
+  log("1+(2*3)/(2-1)");
+  log("1");
+  log("");
+  log("((()))");
+  log("()");
+  log("(())");
+  log("(()())");
+  log("((())())");
+  log("1+(2)");
+  log("(1+(2+(3+(4))))");
+  log("(((1)))");
+  log("1+2+3");
+
+  function log(str1) {
+    console.log("#### INPUT", str1, "####");
+    const result = handler(str1);
+    console.log(result);
+  }
+});
+
+practice(visibility.depthOfParentheses, () => {
+  const handler = (s) => {
+    let arr = new Array();
+    let count = 0;
+    debugger;
+    for (let i of s) {
+      if (i === "(") {
+        count++;
+        arr[count] = "(";
+        debugger;
+      } else if (i === ")") {
+        count--;
+        arr[count] = "(";
+        debugger;
+      }
+      debugger;
+    }
+    debugger;
+    let len = arr.length - 1;
+    return len - 1 < 0 ? 0 : len;
+  };
+
+  log("(1)+((2))+(((3)))");
+  log("()(())((()()))");
+  log("(1+(2*3)+((8)/4))+1");
+  log("(1+(2*3)+((8)/4))+1");
+  log("(1)+((2))+(((3)))");
+  log("1+(2*3)/(2-1)");
+  log("1");
+  log("");
+  log("((()))");
+  log("()");
+  log("(())");
+  log("(()())");
+  log("((())())");
+  log("1+(2)");
+  log("(1+(2+(3+(4))))");
+  log("(((1)))");
+  log("1+2+3");
+
+  function log(str1) {
+    console.log("#### INPUT", str1, "####");
+    const result = handler(str1);
+    console.log(result);
+  }
+});
+
 practice(visibility.sortCharByFreq, () => {
   const handler = (s) => {
     const map = new Map();
@@ -617,7 +916,11 @@ function isVisible(name) {
     isomorphicStrings: 0,
     rotateStringCheck: 0,
     anagramCheck: 0,
-    sortCharByFreq: 1,
+    sortCharByFreq: 0,
+    depthOfParentheses: 0,
+    romanInteger: 0,
+    integerToRoman: 0,
+    integerToRomanGreedy: 1,
   };
 
   return testFunction;
